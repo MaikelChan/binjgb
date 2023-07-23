@@ -5,6 +5,7 @@
 cmake_minimum_required(VERSION 2.8)
 project(binjgb)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${PROJECT_SOURCE_DIR}/cmake)
+set(SDL2_ROOT_DIR )
 
 option(WERROR "Build with warnings as errors" OFF)
 option(WASM "Build for WebAssembly" OFF)

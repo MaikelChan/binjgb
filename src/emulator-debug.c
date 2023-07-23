@@ -598,18 +598,22 @@ static inline Bool hit_breakpoint(Emulator* e) {
 
 Bool HOOK_emulator_step(Emulator* e, const char* func_name) {
   if (emulator_get_trace() && INTR.state < CPU_STATE_HALT) {
-    printf("A:%02X F:%c%c%c%c BC:%04X DE:%04x HL:%04x SP:%04x PC:%04x", REG.A,
-           REG.F.Z ? 'Z' : '-', REG.F.N ? 'N' : '-', REG.F.H ? 'H' : '-',
-           REG.F.C ? 'C' : '-', REG.BC, REG.DE, REG.HL, REG.SP, REG.PC);
-    printf(" (cy: %" PRIu64 ")", e->state.ticks);
-    if (s_log_level[LOG_SYSTEM_PPU] >= 1) {
-      printf(" ppu:%c%u", PPU.lcdc.display ? '+' : '-', PPU.stat.mode);
-    }
-    if (s_log_level[LOG_SYSTEM_PPU] >= 2) {
-      printf(" LY:%u", PPU.ly);
-    }
-    printf(" |");
-    print_instruction(e, REG.PC);
+    u8 F = 0;
+    if (REG.F.Z) F |= 0x80;
+    if (REG.F.N) F |= 0x40;
+    if (REG.F.H) F |= 0x20;
+    if (REG.F.C) F |= 0x10;
+    printf("PC:%04X AF:%02X%02X BC:%04X DE:%04X HL:%04X SP:%04X", REG.PC, REG.A, F, REG.BC, REG.DE, REG.HL, REG.SP);
+    //printf(" (cy: %" PRIu64 ")", e->state.ticks);
+    //if (s_log_level[LOG_SYSTEM_PPU] >= 1) {
+    //  printf(" ppu:%c%u", PPU.lcdc.display ? '+' : '-', PPU.stat.mode);
+    //  printf(" LY:%u", PPU.ly);
+    //}
+    //if (s_log_level[LOG_SYSTEM_PPU] >= 2) {
+    //  printf(" LY:%u", PPU.ly);
+    //}
+    //printf(" |");
+    //print_instruction(e, REG.PC);
     printf("\n");
   }
   if (hit_breakpoint(e)) {

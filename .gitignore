@@ -7,3 +7,7 @@
 __pycache__
 *.pyc
 imgui.ini
+
+/.vs
+/build
+/SDL2*

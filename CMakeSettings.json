@@ -1,0 +1,15 @@
+﻿{
+    "configurations": [
+        {
+            "name": "x64-Release",
+            "generator": "Ninja",
+            "configurationType": "RelWithDebInfo",
+            "buildRoot": "${projectDir}\\out\\build\\${name}",
+            "installRoot": "${projectDir}\\out\\install\\${name}",
+            "cmakeCommandArgs": "-DSDL2_ROOT_DIR=\"D:\\Proyectos\\C\\binjgb\\SDL2-2.28.0\"",
+            "buildCommandArgs": "",
+            "ctestCommandArgs": "",
+            "inheritEnvironments": [ "msvc_x64_x64" ]
+        }
+    ]
+}
